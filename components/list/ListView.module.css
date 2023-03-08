@@ -1,0 +1,15 @@
+
+
+.main {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  column-gap: 15px;
+}
+
+.filters {
+  background-color: #dfe6e9;
+}
+
+.table {
+  width: 100%;
+}
