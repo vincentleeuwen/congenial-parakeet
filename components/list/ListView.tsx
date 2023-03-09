@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Movie, Person, Species } from '@/constants/types';
@@ -41,20 +42,25 @@ const ListView = ({ people, species, movies }: Props) => {
         </section>
         <section>
           <table className={styles.table}>
-            <thead>
+            <tr>
               <th>Name</th>
-              <th>Species</th>
               <th>Birth year</th>
-            </thead>
-            <tbody>
-              {filterPeople(people, query).map((person) => (
+            </tr>
+
+            {filterPeople(people, query).map((person) => {
+              const href = person.url.replace(
+                'https://swapi.dev/api/people/',
+                '/characters/'
+              );
+              return (
                 <tr key={person.url}>
-                  <td>{person.name}</td>
-                  <td>{person.species}</td>
+                  <td>
+                    <Link href={href}>{person.name}</Link>
+                  </td>
                   <td>{person.birth_year}</td>
                 </tr>
-              ))}
-            </tbody>
+              );
+            })}
           </table>
         </section>
       </main>
