@@ -1,11 +1,5 @@
 
 
-.main {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  column-gap: 15px;
-}
-
-.table {
-  width: 100%;
+.filters {
+  padding: 15px;
 }

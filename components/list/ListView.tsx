@@ -1,6 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
 
 import { Movie, Person, Species } from '@/constants/types';
 import MovieFilter from '@/components/filters/MovieFilter';
@@ -33,13 +43,30 @@ const ListView = ({ people, species, movies }: Props) => {
       </Head>
 
       <h1>people</h1>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={4}>
+          <Paper>
+            <div className={styles.filters}>
+              <p>Movies:</p>
+              <MovieFilter movies={movies} />
+              <p>Species:</p>
+              <SpeciesFilter species={species} />
+            </div>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="character table">
+              <TableHead>
+                <TableRow></TableRow>
+              </TableHead>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
+
       <main className={styles.main}>
-        <section className={styles.filters}>
-          <p>Movies:</p>
-          <MovieFilter movies={movies} />
-          <p>Species:</p>
-          <SpeciesFilter species={species} />
-        </section>
+        <section className={styles.filters}></section>
         <section>
           <table className={styles.table}>
             <tr>
