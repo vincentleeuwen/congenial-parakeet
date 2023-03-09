@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import DetailView from '@/components/detail/DetailView';
 import { BASE_URL } from '@/constants/api';
-import { Movie, Person } from '@/constants/types';
+import { Person } from '@/constants/types';
 import { getAllData } from '@/utils/data';
 
 interface PageProps {

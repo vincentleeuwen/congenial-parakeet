@@ -1,24 +1,8 @@
-import axios from 'axios';
-
 import ListView from '@/components/list/ListView';
 
 import { Person, Species, Movie } from '@/constants/types';
 import { BASE_URL } from '@/constants/api';
-
-async function getAllData<T>(url: string, data: T[]): Promise<T[]> {
-  const response = await axios.get(url);
-  const {
-    data: { next, results },
-  } = response;
-
-  const mergedData: T[] = [...data, ...results];
-
-  if (next) {
-    return await getAllData(next, mergedData);
-  }
-
-  return mergedData;
-}
+import { getAllData } from '@/utils/data';
 
 export async function getStaticProps() {
   const people = await getAllData<Person>(`${BASE_URL}/people`, []);
