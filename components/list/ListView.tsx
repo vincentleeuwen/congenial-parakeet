@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import { Movie, Person, Species } from '@/constants/types';
+import BirthYearFilter from '@/components/filters/BirthYearFilter';
 import MovieFilter from '@/components/filters/MovieFilter';
 import SpeciesFilter from '@/components/filters/SpeciesFilter';
 import { filterPeople } from '@/components/filters/utils';
@@ -47,6 +48,8 @@ const ListView = ({ people, species, movies }: Props) => {
         <Grid item xs={12} md={4}>
           <Paper>
             <div className={styles.filters}>
+              <p>Birth year:</p>
+              <BirthYearFilter />
               <p>Movies:</p>
               <MovieFilter movies={movies} />
               <p>Species:</p>
@@ -58,39 +61,31 @@ const ListView = ({ people, species, movies }: Props) => {
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="character table">
               <TableHead>
-                <TableRow></TableRow>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Birth Year</TableCell>
+                </TableRow>
               </TableHead>
+              <TableBody>
+                {filterPeople(people, query).map((person) => {
+                  const href = person.url.replace(
+                    'https://swapi.dev/api/people/',
+                    '/characters/'
+                  );
+                  return (
+                    <TableRow key={person.url}>
+                      <TableCell>
+                        <Link href={href}>{person.name}</Link>
+                      </TableCell>
+                      <TableCell>{person.birth_year}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
             </Table>
           </TableContainer>
         </Grid>
       </Grid>
-
-      <main className={styles.main}>
-        <section className={styles.filters}></section>
-        <section>
-          <table className={styles.table}>
-            <tr>
-              <th>Name</th>
-              <th>Birth year</th>
-            </tr>
-
-            {filterPeople(people, query).map((person) => {
-              const href = person.url.replace(
-                'https://swapi.dev/api/people/',
-                '/characters/'
-              );
-              return (
-                <tr key={person.url}>
-                  <td>
-                    <Link href={href}>{person.name}</Link>
-                  </td>
-                  <td>{person.birth_year}</td>
-                </tr>
-              );
-            })}
-          </table>
-        </section>
-      </main>
     </>
   );
 };
