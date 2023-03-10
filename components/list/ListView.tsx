@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import {
   Grid,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -13,10 +14,10 @@ import {
 } from '@mui/material';
 
 import { Movie, Person, Species } from '@/constants/types';
-import BirthYearFilter from '@/components/filters/BirthYearFilter';
-import MovieFilter from '@/components/filters/MovieFilter';
-import SpeciesFilter from '@/components/filters/SpeciesFilter';
-import { filterPeople } from '@/components/filters/utils';
+import BirthYearFilter from '@/components/Filters/BirthYearFilter';
+import MovieFilter from '@/components/Filters/MovieFilter';
+import SpeciesFilter from '@/components/Filters/SpeciesFilter';
+import { filterPeople } from '@/components/Filters/utils';
 
 import styles from './ListView.module.css';
 
@@ -39,10 +40,10 @@ const ListView = ({ people, species, movies }: Props) => {
         <Grid item xs={12} md={4}>
           <Paper>
             <div className={styles.filters}>
-              <p>Birth year:</p>
-              <BirthYearFilter />
               <p>Movies:</p>
               <MovieFilter movies={movies} />
+              <p>Birth year:</p>
+              <BirthYearFilter />
               <p>Species:</p>
               <SpeciesFilter species={species} />
             </div>
@@ -50,7 +51,7 @@ const ListView = ({ people, species, movies }: Props) => {
         </Grid>
         <Grid item xs={12} md={8}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="character table">
+            <Table aria-label="character table">
               <TableHead>
                 <TableRow>
                   <TableCell>Name</TableCell>
@@ -66,7 +67,9 @@ const ListView = ({ people, species, movies }: Props) => {
                   return (
                     <TableRow key={person.url}>
                       <TableCell>
-                        <Link href={href}>{person.name}</Link>
+                        <Link component={NextLink} href={href}>
+                          {person.name}
+                        </Link>
                       </TableCell>
                       <TableCell>{person.birth_year}</TableCell>
                     </TableRow>

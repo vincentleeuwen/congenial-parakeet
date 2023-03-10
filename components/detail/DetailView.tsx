@@ -36,30 +36,30 @@ const DetailView = ({
             <Table>
               <TableBody>
                 <TableRow>
-                  <StrongTableCell>Name</StrongTableCell>
-                  <TableCell>{name}</TableCell>
+                  <TableCell>Name</TableCell>
+                  <StrongTableCell>{name}</StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <StrongTableCell>Birth Year</StrongTableCell>
-                  <TableCell>{birthYear}</TableCell>
+                  <TableCell>Birth Year</TableCell>
+                  <StrongTableCell>{birthYear}</StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <StrongTableCell>Species</StrongTableCell>
-                  <TableCell>
+                  <TableCell>Species</TableCell>
+                  <StrongTableCell>
                     <LoadData sources={species} />
-                  </TableCell>
+                  </StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <StrongTableCell>Movies</StrongTableCell>
-                  <TableCell>
+                  <TableCell>Movies</TableCell>
+                  <StrongTableCell>
                     <LoadData sources={films} />
-                  </TableCell>
+                  </StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <StrongTableCell>Spaceships</StrongTableCell>
-                  <TableCell>
+                  <TableCell>Spaceships</TableCell>
+                  <StrongTableCell>
                     <LoadData sources={starships} />
-                  </TableCell>
+                  </StrongTableCell>
                 </TableRow>
               </TableBody>
             </Table>
