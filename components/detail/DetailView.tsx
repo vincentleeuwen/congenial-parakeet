@@ -22,6 +22,10 @@ const StrongTableCell = (props: object) => (
   <TableCell {...props} style={{ fontWeight: 'bold' }} />
 );
 
+const FixedWidthTableCell = (props: object) => (
+  <TableCell {...props} style={{ width: 150 }} />
+);
+
 const DetailView = ({
   person: { name, species, films, starships, birth_year: birthYear },
 }: Props) => {
@@ -36,27 +40,27 @@ const DetailView = ({
             <Table>
               <TableBody>
                 <TableRow>
-                  <TableCell>Name</TableCell>
+                  <FixedWidthTableCell>Name</FixedWidthTableCell>
                   <StrongTableCell>{name}</StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>Birth Year</TableCell>
+                  <FixedWidthTableCell>Birth Year</FixedWidthTableCell>
                   <StrongTableCell>{birthYear}</StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>Species</TableCell>
+                  <FixedWidthTableCell>Species</FixedWidthTableCell>
                   <StrongTableCell>
                     <LoadData sources={species} />
                   </StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>Movies</TableCell>
+                  <FixedWidthTableCell>Movies</FixedWidthTableCell>
                   <StrongTableCell>
                     <LoadData sources={films} />
                   </StrongTableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>Spaceships</TableCell>
+                  <FixedWidthTableCell>Spaceships</FixedWidthTableCell>
                   <StrongTableCell>
                     <LoadData sources={starships} />
                   </StrongTableCell>
