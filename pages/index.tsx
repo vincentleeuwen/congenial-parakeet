@@ -1,4 +1,4 @@
-import ListView from '@/components/List/ListView';
+import ListView from '@/components/ListView';
 
 import { Person, Species, Movie } from '@/constants/types';
 import { BASE_URL } from '@/constants/api';

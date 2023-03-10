@@ -1,37 +1,37 @@
 import queryString from 'query-string';
 import { useRouter } from 'next/router';
 
-import { Species } from '@/constants/types';
+import { Movie } from '@/constants/types';
 
-import { getParam, params } from './utils';
+import { getParam, params } from '@/utils/filters';
 
-import styles from './SpeciesFilter.module.css';
+import styles from './MovieFilter.module.css';
 
 interface Props {
-  species: Species[];
+  movies: Movie[];
 }
 
-const Filters = ({ species }: Props) => {
+const MovieFilters = ({ movies }: Props) => {
   const router = useRouter();
   const { query } = router;
 
-  const selectedSpecies: string[] = getParam(query, params.species);
+  const selectedMovies: string[] = getParam(query, params.movies);
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const url = event.target.value;
 
     let newQuery;
-    const exists = selectedSpecies.includes(url);
+    const exists = selectedMovies.includes(url);
     if (exists) {
-      newQuery = selectedSpecies.filter((u) => u !== url);
+      newQuery = selectedMovies.filter((u) => u !== url);
     } else {
-      newQuery = [...selectedSpecies, url];
+      newQuery = [...selectedMovies, url];
     }
 
     const finalQuery = {
       ...query,
-      [params.species]: newQuery,
+      [params.movies]: newQuery,
     };
 
     const stringParams = queryString.stringify(finalQuery);
@@ -39,8 +39,8 @@ const Filters = ({ species }: Props) => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      {species.map(({ url, name }) => (
+    <div>
+      {movies.map(({ url, title }) => (
         <div key={url}>
           <input
             type="checkbox"
@@ -48,10 +48,10 @@ const Filters = ({ species }: Props) => {
             id={url}
             value={url}
             onChange={handleClick}
-            checked={selectedSpecies.includes(url)}
+            checked={selectedMovies.includes(url)}
           />
           <label className={styles.label} htmlFor={url}>
-            {name}
+            {title}
           </label>
         </div>
       ))}
@@ -59,4 +59,4 @@ const Filters = ({ species }: Props) => {
   );
 };
 
-export default Filters;
+export default MovieFilters;

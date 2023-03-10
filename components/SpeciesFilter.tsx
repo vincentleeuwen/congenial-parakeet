@@ -1,37 +1,37 @@
 import queryString from 'query-string';
 import { useRouter } from 'next/router';
 
-import { Movie } from '@/constants/types';
+import { Species } from '@/constants/types';
 
-import { getParam, params } from './utils';
+import { getParam, params } from '@/utils/filters';
 
-import styles from './MovieFilter.module.css';
+import styles from './SpeciesFilter.module.css';
 
 interface Props {
-  movies: Movie[];
+  species: Species[];
 }
 
-const MovieFilters = ({ movies }: Props) => {
+const Filters = ({ species }: Props) => {
   const router = useRouter();
   const { query } = router;
 
-  const selectedMovies: string[] = getParam(query, params.movies);
+  const selectedSpecies: string[] = getParam(query, params.species);
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const url = event.target.value;
 
     let newQuery;
-    const exists = selectedMovies.includes(url);
+    const exists = selectedSpecies.includes(url);
     if (exists) {
-      newQuery = selectedMovies.filter((u) => u !== url);
+      newQuery = selectedSpecies.filter((u) => u !== url);
     } else {
-      newQuery = [...selectedMovies, url];
+      newQuery = [...selectedSpecies, url];
     }
 
     const finalQuery = {
       ...query,
-      [params.movies]: newQuery,
+      [params.species]: newQuery,
     };
 
     const stringParams = queryString.stringify(finalQuery);
@@ -39,8 +39,8 @@ const MovieFilters = ({ movies }: Props) => {
   };
 
   return (
-    <div>
-      {movies.map(({ url, title }) => (
+    <div className={styles.wrapper}>
+      {species.map(({ url, name }) => (
         <div key={url}>
           <input
             type="checkbox"
@@ -48,10 +48,10 @@ const MovieFilters = ({ movies }: Props) => {
             id={url}
             value={url}
             onChange={handleClick}
-            checked={selectedMovies.includes(url)}
+            checked={selectedSpecies.includes(url)}
           />
           <label className={styles.label} htmlFor={url}>
-            {title}
+            {name}
           </label>
         </div>
       ))}
@@ -59,4 +59,4 @@ const MovieFilters = ({ movies }: Props) => {
   );
 };
 
-export default MovieFilters;
+export default Filters;

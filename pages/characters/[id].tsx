@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import DetailView from '@/components/Detail/DetailView';
+import DetailView from '@/components/DetailView';
 import { BASE_URL } from '@/constants/api';
 import { Person } from '@/constants/types';
 import { getAllData } from '@/utils/data';

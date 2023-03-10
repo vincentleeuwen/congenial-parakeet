@@ -2,13 +2,13 @@ import queryString from 'query-string';
 import { useRouter } from 'next/router';
 
 import Slider from '@mui/material/Slider';
-import { params, years } from './utils';
+import { params, years } from '@/utils/filters';
 
 const BirthYearFilter = () => {
   const router = useRouter();
   const { query } = router;
 
-  const handleChange = (event: Event, newValue: number | number[]) => {
+  const handleChange = (_: Event, newValue: number | number[]) => {
     const [min, max] = newValue as number[];
     const stringParams = queryString.stringify({ ...query, min, max });
     router.push(`/?${stringParams}`, undefined, { shallow: true });

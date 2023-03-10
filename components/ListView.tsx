@@ -14,10 +14,10 @@ import {
 } from '@mui/material';
 
 import { Movie, Person, Species } from '@/constants/types';
-import BirthYearFilter from '@/components/Filters/BirthYearFilter';
-import MovieFilter from '@/components/Filters/MovieFilter';
-import SpeciesFilter from '@/components/Filters/SpeciesFilter';
-import { filterPeople } from '@/components/Filters/utils';
+import BirthYearFilter from '@/components/BirthYearFilter';
+import MovieFilter from '@/components/MovieFilter';
+import SpeciesFilter from '@/components/SpeciesFilter';
+import { filterPeople } from '@/utils/filters';
 
 import styles from './ListView.module.css';
 
