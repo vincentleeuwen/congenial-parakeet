@@ -1,9 +1,10 @@
 export interface Person {
   name: string;
   url: string;
-  species: string;
+  species: string[];
   birth_year: string;
   films: string[];
+  starships: string[];
 }
 
 export interface Species {

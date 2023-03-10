@@ -1,44 +1,71 @@
-import Grid from '@mui/material/Grid';
+import Head from 'next/head';
 
-import { Movie, Person } from '@/constants/types';
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+} from '@mui/material';
+
+import { Person } from '@/constants/types';
+
+import LoadData from './LoadData';
 
 interface Props {
   person: Person;
-  movies: Movie[];
 }
 
-const DetailView = ({ person: { name, species, films } }: Props) => {
+const StrongTableCell = (props: object) => (
+  <TableCell {...props} style={{ fontWeight: 'bold' }} />
+);
+
+const DetailView = ({
+  person: { name, species, films, starships, birth_year: birthYear },
+}: Props) => {
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          <p>filters</p>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <p>data</p>
+      <Head>
+        <title>{name} - Star wars app</title>
+      </Head>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <StrongTableCell>Name</StrongTableCell>
+                  <TableCell>{name}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <StrongTableCell>Birth Year</StrongTableCell>
+                  <TableCell>{birthYear}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <StrongTableCell>Species</StrongTableCell>
+                  <TableCell>
+                    <LoadData sources={species} />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <StrongTableCell>Movies</StrongTableCell>
+                  <TableCell>
+                    <LoadData sources={films} />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <StrongTableCell>Spaceships</StrongTableCell>
+                  <TableCell>
+                    <LoadData sources={starships} />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Grid>
       </Grid>
-      <div>
-        {/* <Button variant="contained">Hello World</Button> */}
-        <table>
-          <tr>
-            <td>Name</td>
-            <td>{name}</td>
-          </tr>
-          <tr>
-            <td>Species</td>
-            <td>{species}</td>
-          </tr>
-          <tr>
-            <td>Movies</td>
-            <td>{films}</td>
-          </tr>
-          <tr>
-            <td>Spaceships</td>
-            <td>{name}</td>
-          </tr>
-        </table>
-      </div>
     </>
   );
 };
